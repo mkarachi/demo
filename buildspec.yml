@@ -14,6 +14,7 @@ phases:
       - echo $REPOSITORY_URI
       - echo $TAG_NAME
       - echo /etc/*-release
+      - uname -a
       # installation
       - yum update -y
       - yum install -y software-properties-common
