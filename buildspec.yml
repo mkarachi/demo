@@ -12,7 +12,8 @@ phases:
       - echo $ARTIFACT
       - echo $ARTIFACT_TYPE
       - echo $REPOSITORY_URI
-      - echo $TAG_NAME  
+      - echo $TAG_NAME
+      - echo /etc/*-release
       # installation
       - yum update -y
       - yum install -y software-properties-common
