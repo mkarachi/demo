@@ -14,12 +14,13 @@ phases:
       - echo $REPOSITORY_URI
       - echo $TAG_NAME  
       # installation
-      - apt update -y
-      - apt install -y software-properties-common
-      - add-apt-repository ppa:openjdk-r/ppa
-      - apt update -y
-      - apt install -y openjdk-8-jdk
-      - apt install -y maven
+      - yum update -y
+      - yum install -y software-properties-common
+      # - add-apt-repository ppa:openjdk-r/ppa
+      # - yum update -y
+      # - yum install -y openjdk-8-jdk
+      - yum install java-1.8.0-openjdk-devel
+      - yum install -y maven
 
   pre_build:
     commands:
