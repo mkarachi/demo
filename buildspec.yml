@@ -31,7 +31,7 @@ phases:
       - echo Maven Build ...
       - mvn package
       - echo Building the Docker image...  
-      - docker build demo_microservices -t .
+      - docker build -t demo_microservices .
       - docker tag demo_microservices:$TAG_NAME $REPOSITORY_URI:$TAG_NAME
   post_build:
     commands:
