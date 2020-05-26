@@ -4,10 +4,11 @@ phases:
   install:
     commands:
      # variables
-      - REPOSITORY_URI=635259673755.dkr.ecr.us-east-2.amazonaws.com/demo_microservices:latest
+      - REPOSITORY_URI=635259673755.dkr.ecr.us-east-2.amazonaws.com/demo_microservices
       - ARTIFACT=demo
       - ARTIFACT_TYPE=.jar 
-      - TAG_NAME=$REPOSITORY_URI:$ARTIFACT
+      # - TAG_NAME=$REPOSITORY_URI:$ARTIFACT
+      - TAG_NAME=latest
       - echo $AWS_DEFAULT_REGION 
       - echo $ARTIFACT
       - echo $ARTIFACT_TYPE
@@ -30,8 +31,8 @@ phases:
       - echo Maven Build ...
       - mvn package
       - echo Building the Docker image...  
-      - docker build -f src/main/docker/Dockerfile -t $TAG_NAME .
-      - docker tag $TAG_NAME $TAG_NAME
+      - docker build -t $REPOSITORY_URI -t .
+      - docker tag $REPOSITORY_URI:$TAG_NAME $REPOSITORY_URI:$TAG_NAME
   post_build:
     commands:
       #- docker tag $REPOSITORY_URI:$ARTIFACT $REPOSITORY_URI:$$ARTIFACT
@@ -39,7 +40,7 @@ phases:
        - $(aws ecr get-login --region us-east-2 --no-include-email)
        - echo Build completed on `date`
        - echo Pushing the Docker images...
-       - docker push $TAG_NAME
+       - docker push $REPOSITORY_URI:$TAG_NAME
        #- aws ecs list-services --cluster UngerwECS
        #- aws ecs update-service --cluster UngerwECS --service SpringBootService-Service-XBO2INJQRTEO --task-definition UngerwSpringBootTD
        
