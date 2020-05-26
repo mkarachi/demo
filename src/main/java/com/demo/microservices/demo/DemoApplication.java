@@ -11,7 +11,7 @@ public class DemoApplication {
 
 	@RequestMapping(value="/test")
 	public String test() {
-		return "Testing 12345";
+		return "Testing 123456";
 	}
 
 	public static void main(String[] args) {
