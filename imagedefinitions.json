@@ -1,6 +1,6 @@
 [
     {
-        "name": "demo",
+        "name": "demo_microservices",
         "imageUri": "635259673755.dkr.ecr.us-east-2.amazonaws.com/demo_microservices:latest"
     }
 ]
