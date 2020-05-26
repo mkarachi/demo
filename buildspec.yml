@@ -31,15 +31,15 @@ phases:
       - echo Maven Build ...
       - mvn package
       - echo Building the Docker image...  
-      - docker build -t $REPOSITORY_URI -t .
-      - docker tag $REPOSITORY_URI:$TAG_NAME $REPOSITORY_URI:$TAG_NAME
+      - docker build demo_microservices -t .
+      - docker tag demo_microservices:$TAG_NAME $REPOSITORY_URI:$TAG_NAME
   post_build:
     commands:
       #- docker tag $REPOSITORY_URI:$ARTIFACT $REPOSITORY_URI:$$ARTIFACT
        #- $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
        - $(aws ecr get-login --region us-east-2 --no-include-email)
        - echo Build completed on `date`
-       - echo Pushing the Docker images...
+       - echo Pushing the Docker images... $REPOSITORY_URI:$TAG_NAME
        - docker push $REPOSITORY_URI:$TAG_NAME
        #- aws ecs list-services --cluster UngerwECS
        #- aws ecs update-service --cluster UngerwECS --service SpringBootService-Service-XBO2INJQRTEO --task-definition UngerwSpringBootTD
